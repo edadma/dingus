@@ -198,7 +198,7 @@ def App: FluxusNode = {
               // Preview Tab Content
               if (activeTab == "preview")
                 div(
-                  cls := "prose max-w-none p-4",
+                  cls := "prose prose-invert",
                   rawHtml(renderedHtml),
                 )
               else null,
