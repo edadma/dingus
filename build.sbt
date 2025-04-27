@@ -19,6 +19,7 @@ lazy val fluxus_template = project
       "io.github.edadma"  %%% "fluxus-daisyui"    % "0.0.5",
       "io.github.edadma"  %%% "fluxus-querystate" % "0.0.2",
       "io.github.edadma"  %%% "fluxus-i18n"       % "0.0.2",
+      "io.github.edadma"  %%% "markdown"          % "0.0.2",
     ),
     scalaJSUseMainModuleInitializer := true,
     scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.ESModule) },
