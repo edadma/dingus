@@ -1,12 +1,8 @@
-; universalconverter.app code
+; dingus codebase
 
 # app sources
-./src/main/scala/io/github/edadma/universalconverter/app
+./src/main/scala/io/github/edadma/dingus
 App.scala
-ConversionData.scala
-ConversionService.scala
-I18nData.scala
-Utils.scala
 
 # build files
 ./
