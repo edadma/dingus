@@ -14,7 +14,7 @@ lazy val dingus = project
     jsEnv        := new org.scalajs.jsenv.nodejs.NodeJSEnv(),
     libraryDependencies ++= Seq(
       "io.github.cquiroz" %%% "scala-java-time"   % "2.6.0",
-      "io.github.edadma"  %%% "fluxus"            % "0.0.29",
+      "io.github.edadma"  %%% "fluxus"            % "0.0.31",
       "io.github.edadma"  %%% "fluxus-remix"      % "0.0.2",
       "io.github.edadma"  %%% "fluxus-daisyui"    % "0.0.5",
       "io.github.edadma"  %%% "fluxus-querystate" % "0.0.2",

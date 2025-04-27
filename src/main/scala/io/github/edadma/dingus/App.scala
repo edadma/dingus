@@ -199,7 +199,7 @@ def App: FluxusNode = {
               if (activeTab == "preview")
                 div(
                   cls := "prose max-w-none p-4",
-//                  dangerouslySetInnerHTML := renderedHtml,
+                  rawHtml(renderedHtml),
                 )
               else null,
 
