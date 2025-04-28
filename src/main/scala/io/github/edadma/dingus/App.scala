@@ -167,6 +167,8 @@ def App: FluxusNode = {
     colorLiteral = fansi.Attrs.Empty,
   )
 
+  val dropdownLabelRef = useRef[dom.html.Element]()
+
   // Parse the markdown to get the document AST
   val document = parseDocumentContent(markdownInput)
 
@@ -231,8 +233,7 @@ def App: FluxusNode = {
 
           // Left side of toolbar
           div(
-            cls      := "flex gap-2",
-            tabIndex := -1, // Important for keyboard navigation
+            cls := "flex gap-2",
             Button <> ButtonProps(
               text = "Clear",
               variant = "ghost",
@@ -242,7 +243,8 @@ def App: FluxusNode = {
               cls := "dropdown dropdown-start", // Added dropdown-end to align it properly
               label(
                 cls      := "btn btn-ghost",
-                tabIndex := -1, // Important for keyboard navigation
+                tabIndex := -1,
+                ref      := dropdownLabelRef, // Add ref to the label
                 "Templates",
                 svg(
                   xmlns          := "http://www.w3.org/2000/svg",
@@ -259,7 +261,14 @@ def App: FluxusNode = {
               ul(
                 tabIndex := 0, // Important for keyboard navigation
                 cls      := "dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-52",
-                li(a(onClick := (() => loadTemplate("basic")), "Basic Syntax")),
+                li(a(
+                  onClick := (() => {
+                    loadTemplate("basic")
+                    dropdownLabelRef.current.blur()
+                    dom.document.querySelector("textarea").asInstanceOf[dom.html.TextArea].focus()
+                  }),
+                  "Basic Syntax",
+                )),
 //                li(a(onClick := (() => loadTemplate("extended")), "Extended Syntax")),
                 li(a(onClick := (() => loadTemplate("tables")), "Tables Example")),
                 li(a(onClick := (() => loadTemplate("links")), "Links & Images")),
