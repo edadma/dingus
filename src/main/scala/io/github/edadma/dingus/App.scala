@@ -175,6 +175,7 @@ def App: FluxusNode = {
 
   // Render markdown to HTML
   val renderedHtml = renderToHTML(document)
+//  val renderedXml  = renderToXML(document)
 
   // Function to handle changes to the markdown textarea
   def handleMarkdownChange(e: dom.Event): Unit = {
@@ -215,7 +216,7 @@ def App: FluxusNode = {
 
     // Header
     div(
-      cls := "bg-primary text-primary-content p-4 text-center shadow-md",
+      cls := "text-primary-content p-4 text-center",
       h1(cls := "text-3xl font-bold", "Scala Markdown Dingus"),
       p(cls  := "opacity-90", "Interactive demo for the io.github.edadma.markdown library"),
     ),
@@ -286,7 +287,7 @@ def App: FluxusNode = {
             title = Some("Markdown Input"),
             children = div(
               textarea(
-                cls     := "w-full h-[400px] min-h-[400px] p-4 font-mono text-sm focus:outline-none resize-none",
+                cls     := "w-full h-[500px] p-4 font-mono text-sm focus:outline-none resize-none",
                 value   := markdownInput,
                 onInput := (handleMarkdownChange(_)),
               ),
@@ -313,6 +314,11 @@ def App: FluxusNode = {
                     title = "HTML",
                     children = null,
                   ),
+//                  TabPanelProps(
+//                    id = "xml",
+//                    title = "XML",
+//                    children = null,
+//                  ),
                   TabPanelProps(
                     id = "ast",
                     title = "AST",
@@ -322,7 +328,7 @@ def App: FluxusNode = {
               ),
             ),
             children = div(
-              cls := "w-full h-[400px]",
+              cls := "w-full h-[500px]",
 
               // Preview Tab Content
               if (activeTab == "preview")
@@ -340,6 +346,14 @@ def App: FluxusNode = {
                 )
               else null,
 
+//              // XML Tab Content
+//              if (activeTab == "xml")
+//                div(
+//                  cls := "font-mono text-sm p-4 bg-base-200 rounded-md whitespace-pre-wrap overflow-auto h-full",
+//                  renderedXml,
+//                )
+//              else null,
+
               // AST Tab Content
               if (activeTab == "ast")
                 div(
@@ -355,7 +369,7 @@ def App: FluxusNode = {
 
     // Footer
     div(
-      cls := "bg-base-200 p-4 text-center text-base-content/70 mt-8",
+      cls := "p-4 text-center text-base-content/70 mt-8",
       p(
         "Powered by ",
         a(
