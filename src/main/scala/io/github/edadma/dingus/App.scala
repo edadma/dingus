@@ -43,6 +43,10 @@ val basicSyntaxTemplate =
     |
     |__This text is also bold__
     |
+    |***This is bold and italicized***
+    |
+    |___This is also bold and italicized___
+    |
     |## Lists
     |
     |### Unordered Lists
