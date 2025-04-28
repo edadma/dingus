@@ -15,8 +15,7 @@ import org.scalajs.macrotaskexecutor.MacrotaskExecutor.Implicits.global
 
 val initialMarkdown = """..."""
 val basicSyntaxTemplate =
-  """
-    |# Markdown Basic Syntax
+  """# Markdown Basic Syntax
     |
     |## Headings
     |
@@ -76,11 +75,10 @@ val basicSyntaxTemplate =
     |***
     |
     |___
-    """.stripMargin
+    |""".stripMargin
 //val extendedSyntaxTemplate = """..."""
 val tablesTemplate =
-  """
-    |# Markdown Tables
+  """# Markdown Tables
     |
     |## Basic Table
     |
@@ -106,11 +104,10 @@ val tablesTemplate =
     ||filter()  |Selects elements by predicate   |
     ||reduce()  |Combines elements               |
     ||forEach() |Executes function on elements   |
-    """.stripMargin
+    |""".stripMargin
 
 val linksImagesTemplate =
-  """
-    |# Links and Images in Markdown
+  """# Links and Images in Markdown
     |
     |## Basic Links
     |
@@ -151,7 +148,7 @@ val linksImagesTemplate =
     |## Images with Custom Styling (using HTML)
     |
     |<img src="https://picsum.photos/200/100" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" alt="Styled image">
-    """.stripMargin
+    |""".stripMargin
 def App: FluxusNode = {
   val (markdownInput, setMarkdownInput, _) = useState("")
 
@@ -188,6 +185,7 @@ def App: FluxusNode = {
   // Function to clear the markdown input
   def handleClear(): Unit = {
     setMarkdownInput("")
+    dom.document.querySelector("textarea").asInstanceOf[dom.html.TextArea].focus()
   }
 
   // Function to copy HTML to clipboard
@@ -270,8 +268,22 @@ def App: FluxusNode = {
                   "Basic Syntax",
                 )),
 //                li(a(onClick := (() => loadTemplate("extended")), "Extended Syntax")),
-                li(a(onClick := (() => loadTemplate("tables")), "Tables Example")),
-                li(a(onClick := (() => loadTemplate("links")), "Links & Images")),
+                li(a(
+                  onClick := (() => {
+                    loadTemplate("tables")
+                    dropdownLabelRef.current.blur()
+                    dom.document.querySelector("textarea").asInstanceOf[dom.html.TextArea].focus()
+                  }),
+                  "Tables Example",
+                )),
+                li(a(
+                  onClick := (() => {
+                    loadTemplate("links")
+                    dropdownLabelRef.current.blur()
+                    dom.document.querySelector("textarea").asInstanceOf[dom.html.TextArea].focus()
+                  }),
+                  "Links & Images",
+                )),
               ),
             ),
           ),
