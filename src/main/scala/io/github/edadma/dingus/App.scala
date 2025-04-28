@@ -13,8 +13,35 @@ import org.scalajs.macrotaskexecutor.MacrotaskExecutor.Implicits.global
 
 @main def run(): Unit = render(App, "app")
 
-val initialMarkdown        = """..."""
-val basicSyntaxTemplate    = """..."""
+val initialMarkdown = """..."""
+val basicSyntaxTemplate =
+  """
+    |
+    |- a
+    |
+    |asdf
+    |
+    |- a
+    |
+    |asdf
+    |
+    |- a
+    |
+    |asdf
+    |
+    |- a
+    |
+    |asdf
+    |
+    |- a
+    |
+    |asdf
+    |
+    |- a
+    |
+    |asdf
+    |
+    |""".stripMargin
 val extendedSyntaxTemplate = """..."""
 val tablesTemplate         = """..."""
 val linksImagesTemplate    = """..."""
@@ -152,12 +179,11 @@ def App: FluxusNode = {
           // Markdown Input Panel
           Card <> CardProps(
             bordered = true,
-            className = "shadow-sm h-full",
+            className = "shadow-sm",
             title = Some("Markdown Input"),
             children = div(
-              cls := "w-full h-full min-h-[400px]",
               textarea(
-                cls     := "w-full h-full min-h-[400px] p-4 font-mono text-sm focus:outline-none resize-none",
+                cls     := "w-full h-[400px] min-h-[400px] p-4 font-mono text-sm focus:outline-none resize-none",
                 value   := markdownInput,
                 onInput := (handleMarkdownChange(_)),
               ),
@@ -167,7 +193,7 @@ def App: FluxusNode = {
           // Output Panel with Tabs
           Card <> CardProps(
             bordered = true,
-            className = "shadow-sm h-full",
+            className = "shadow-sm",
             headerActions = Some(
               Tabs <> TabsProps(
                 variant = "lifted",
@@ -193,12 +219,12 @@ def App: FluxusNode = {
               ),
             ),
             children = div(
-              cls := "min-h-[400px] w-full h-full",
+              cls := "w-full h-[400px]",
 
               // Preview Tab Content
               if (activeTab == "preview")
                 div(
-                  cls := "prose prose-invert",
+                  cls := "prose prose-invert w-full h-full overflow-auto",
                   rawHtml(renderedHtml),
                 )
               else null,
