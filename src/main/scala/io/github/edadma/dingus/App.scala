@@ -130,30 +130,27 @@ def App: FluxusNode = {
               variant = "ghost",
               onClick = () => handleClear(),
             ),
-
-            // Template dropdown
             div(
-              cls := "dropdown",
-              Button <> ButtonProps(
-                text = "Templates",
-                variant = "ghost",
-                endIcon = Some(
-                  svg(
-                    xmlns          := "http://www.w3.org/2000/svg",
-                    width          := "16",
-                    height         := "16",
-                    viewBox        := "0 0 24 24",
-                    fill           := "none",
-                    stroke         := "currentColor",
-                    strokeWidth    := "2",
-                    strokeLinecap  := "round",
-                    strokeLinejoin := "round",
-                    path(d := "M6 9l6 6 6-6"),
-                  ),
+              cls := "dropdown dropdown-start", // Added dropdown-end to align it properly
+              label(
+                cls      := "btn btn-ghost",
+                tabIndex := 0, // Important for keyboard navigation
+                "Templates",
+                svg(
+                  xmlns          := "http://www.w3.org/2000/svg",
+                  cls            := "ml-1 h-4 w-4",
+                  viewBox        := "0 0 24 24",
+                  fill           := "none",
+                  stroke         := "currentColor",
+                  strokeWidth    := "2",
+                  strokeLinecap  := "round",
+                  strokeLinejoin := "round",
+                  path(d := "M6 9l6 6 6-6"),
                 ),
               ),
               ul(
-                cls := "dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-52",
+                tabIndex := 0, // Important for keyboard navigation
+                cls      := "dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-52",
                 li(a(onClick := (() => loadTemplate("basic")), "Basic Syntax")),
                 li(a(onClick := (() => loadTemplate("extended")), "Extended Syntax")),
                 li(a(onClick := (() => loadTemplate("tables")), "Tables Example")),
