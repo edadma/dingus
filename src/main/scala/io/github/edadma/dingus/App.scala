@@ -231,7 +231,8 @@ def App: FluxusNode = {
 
           // Left side of toolbar
           div(
-            cls := "flex gap-2",
+            cls      := "flex gap-2",
+            tabIndex := -1, // Important for keyboard navigation
             Button <> ButtonProps(
               text = "Clear",
               variant = "ghost",
