@@ -224,7 +224,7 @@ def App: FluxusNode = {
               // Preview Tab Content
               if (activeTab == "preview")
                 div(
-                  cls := "prose prose-invert w-full h-full overflow-auto",
+                  cls := "prose prose-invert w-full h-full overflow-auto max-w-none",
                   rawHtml(renderedHtml),
                 )
               else null,
