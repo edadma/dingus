@@ -241,7 +241,7 @@ def App: FluxusNode = {
               cls := "dropdown dropdown-start", // Added dropdown-end to align it properly
               label(
                 cls      := "btn btn-ghost",
-                tabIndex := 0, // Important for keyboard navigation
+                tabIndex := -1, // Important for keyboard navigation
                 "Templates",
                 svg(
                   xmlns          := "http://www.w3.org/2000/svg",
@@ -287,9 +287,10 @@ def App: FluxusNode = {
             title = Some("Markdown Input"),
             children = div(
               textarea(
-                cls     := "w-full h-[500px] p-4 font-mono text-sm focus:outline-none resize-none",
-                value   := markdownInput,
-                onInput := (handleMarkdownChange(_)),
+                cls       := "w-full h-[500px] p-4 font-mono text-sm focus:outline-none resize-none",
+                value     := markdownInput,
+                onInput   := (handleMarkdownChange(_)),
+                autofocus := true,
               ),
             ),
           ),
