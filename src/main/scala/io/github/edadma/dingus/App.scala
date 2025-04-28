@@ -16,36 +16,138 @@ import org.scalajs.macrotaskexecutor.MacrotaskExecutor.Implicits.global
 val initialMarkdown = """..."""
 val basicSyntaxTemplate =
   """
+    |# Markdown Basic Syntax
     |
-    |- a
+    |## Headings
     |
-    |asdf
+    |# Heading 1
+    |## Heading 2
+    |### Heading 3
+    |#### Heading 4
+    |##### Heading 5
+    |###### Heading 6
     |
-    |- a
+    |## Paragraphs
     |
-    |asdf
+    |This is a paragraph. It's separated from other elements by a blank line.
     |
-    |- a
+    |This is another paragraph. Markdown is easy to read and write!
     |
-    |asdf
+    |## Emphasis
     |
-    |- a
+    |*This text is italicized*
     |
-    |asdf
+    |_This text is also italicized_
     |
-    |- a
+    |**This text is bold**
     |
-    |asdf
+    |__This text is also bold__
     |
-    |- a
+    |## Lists
     |
-    |asdf
+    |### Unordered Lists
+    |- Item 1
+    |- Item 2
+    |  - Nested item 1
+    |  - Nested item 2
+    |- Item 3
     |
-    |""".stripMargin
-val extendedSyntaxTemplate = """..."""
-val tablesTemplate         = """..."""
-val linksImagesTemplate    = """..."""
+    |### Ordered Lists
+    |1. First item
+    |2. Second item
+    |   1. Nested item 1
+    |   2. Nested item 2
+    |3. Third item
+    |
+    |## Blockquotes
+    |
+    |> This is a blockquote
+    |>
+    |> It can span multiple lines
+    |
+    |## Horizontal Rules
+    |
+    |---
+    |
+    |***
+    |
+    |___
+    """.stripMargin
+//val extendedSyntaxTemplate = """..."""
+val tablesTemplate =
+  """
+    |# Markdown Tables
+    |
+    |## Basic Table
+    |
+    || Name     | Type   | Description         |
+    ||----------|--------|---------------------|
+    || id       | Int    | Unique identifier   |
+    || title    | String | Post title          |
+    || content  | String | Post content        |
+    || authorId | Int    | Author identifier   |
+    |
+    |## Aligned Table
+    |
+    || Left Aligned | Center Aligned | Right Aligned |
+    ||:-------------|:--------------:|-------------:|
+    || Left         | Center         | Right        |
+    || Text         | Text           | Text         |
+    |
+    |## Compact Table
+    |
+    || Function | Description                    |
+    ||----------|--------------------------------|
+    ||map()     |Transforms elements             |
+    ||filter()  |Selects elements by predicate   |
+    ||reduce()  |Combines elements               |
+    ||forEach() |Executes function on elements   |
+    """.stripMargin
 
+val linksImagesTemplate =
+  """
+    |# Links and Images in Markdown
+    |
+    |## Basic Links
+    |
+    |[Link to GitHub](https://github.com)
+    |
+    |[Link with title](https://github.com "GitHub Homepage")
+    |
+    |## Reference Links
+    |
+    |[Reference link][1]
+    |
+    |[1]: https://github.com "GitHub"
+    |
+    |## URLs and Email Addresses
+    |
+    |<https://github.com>
+    |
+    |<example@example.com>
+    |
+    |## Basic Images
+    |
+    |![Alt text for image](https://picsum.photos/200/100 "Optional title")
+    |
+    |## Linked Images
+    |
+    |[![Alt text for image](https://picsum.photos/200/100)](https://github.com)
+    |
+    |## Image Sizing (using HTML)
+    |
+    |<img src="https://picsum.photos/200/100" width="300" height="150" alt="Resized image">
+    |
+    |## Image References
+    |
+    |![Reference image][logo]
+    |
+    |[logo]: https://picsum.photos/200/100 "Logo Title"
+    |
+    |## Images with Custom Styling (using HTML)
+    |
+    |<img src="https://picsum.photos/200/100" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" alt="Styled image">
+    """.stripMargin
 def App: FluxusNode = {
   val (markdownInput, setMarkdownInput, _) = useState("")
 
@@ -94,11 +196,11 @@ def App: FluxusNode = {
   // Function to load a template
   def loadTemplate(templateName: String): Unit = {
     val template = templateName match {
-      case "basic"    => basicSyntaxTemplate
-      case "extended" => extendedSyntaxTemplate
-      case "tables"   => tablesTemplate
-      case "links"    => linksImagesTemplate
-      case _          => initialMarkdown
+      case "basic" => basicSyntaxTemplate
+//      case "extended" => extendedSyntaxTemplate
+      case "tables" => tablesTemplate
+      case "links"  => linksImagesTemplate
+      case _        => initialMarkdown
     }
     setMarkdownInput(template)
   }
@@ -152,7 +254,7 @@ def App: FluxusNode = {
                 tabIndex := 0, // Important for keyboard navigation
                 cls      := "dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-52",
                 li(a(onClick := (() => loadTemplate("basic")), "Basic Syntax")),
-                li(a(onClick := (() => loadTemplate("extended")), "Extended Syntax")),
+//                li(a(onClick := (() => loadTemplate("extended")), "Extended Syntax")),
                 li(a(onClick := (() => loadTemplate("tables")), "Tables Example")),
                 li(a(onClick := (() => loadTemplate("links")), "Links & Images")),
               ),
