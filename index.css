@@ -7,15 +7,3 @@
 [align="left"] { text-align: left; }
 [align="center"] { text-align: center; }
 [align="right"] { text-align: right; }
-
-/* Regular tables (with alignment attributes) */
-table th[align], table td[align] {
-  padding: 8px 16px; /* Spacious */
-}
-
-/* Compact tables (without alignment attributes) */
-table:not(:has(th[align])) th,
-table:not(:has(td[align])) td {
-  padding: 4px 8px; /* Tighter */
-  font-size: 0.9em;
-}

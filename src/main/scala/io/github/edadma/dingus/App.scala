@@ -1,13 +1,12 @@
 package io.github.edadma.dingus
 
 import io.github.edadma.fluxus.*
-import io.github.edadma.fluxus.remix.{BookOpenLine, BookOpenLineProps}
-import io.github.edadma.fluxus.daisyui._
-import org.scalajs.dom.document
+import io.github.edadma.fluxus.daisyui.*
+import org.scalajs.dom.{HTMLTextAreaElement, document}
 import org.scalajs.dom
+
 import scala.scalajs.js
-import org.scalajs.dom.HTMLTextAreaElement
-import io.github.edadma.markdown._
+import io.github.edadma.markdown.*
 import pprint.PPrinter
 import org.scalajs.macrotaskexecutor.MacrotaskExecutor.Implicits.global
 
@@ -167,14 +166,14 @@ def App: FluxusNode = {
   val dropdownLabelRef = useRef[dom.html.Element]()
 
   // Parse the markdown to get the document AST
-  val document = parseDocumentContent(markdownInput)
+  val (prettyAst, renderedHtml) = useMemo(
+    () => {
+      val document = parseDocumentContent(markdownInput)
 
-  // Generate pretty-printed AST string using pprint without colors
-  val prettyAst = noColorPPrinter.apply(document).render
-
-  // Render markdown to HTML
-  val renderedHtml = renderToHTML(document)
-//  val renderedXml  = renderToXML(document)
+      (noColorPPrinter.apply(document).render, renderToHTML(document))
+    },
+    Seq(markdownInput),
+  )
 
   // Function to handle changes to the markdown textarea
   def handleMarkdownChange(e: dom.Event): Unit = {
