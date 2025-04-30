@@ -15,6 +15,10 @@ index.html
 ./project
 plugins.sbt
 
+# build
+./dist
+index.html
+
 # docs
 ./
 README.md
