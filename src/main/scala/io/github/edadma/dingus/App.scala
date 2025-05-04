@@ -287,7 +287,7 @@ def App: FluxusNode = {
 
   // Main App Layout
   div(
-    cls := "bg-base-100 min-h-screen flex flex-col",
+    cls := "bg-base-100 min-h-screen flex flex-col overflow-hidden",
 
     // Header
     div(
