@@ -16,7 +16,7 @@ lazy val dingus = project
       "io.github.cquiroz" %%% "scala-java-time" % "2.6.0",
       "io.github.edadma"  %%% "fluxus"          % "0.0.31",
       "io.github.edadma"  %%% "fluxus-daisyui"  % "0.0.5",
-      "io.github.edadma"  %%% "markdown"        % "0.0.7",
+      "io.github.edadma"  %%% "markdown"        % "0.0.8",
     ),
     resolvers += "Sonatype OSS Releases" at "https://s01.oss.sonatype.org/content/repositories/releases",
     scalaJSUseMainModuleInitializer := true,
