@@ -6,11 +6,35 @@ import org.scalajs.dom.HTMLTextAreaElement
 import org.scalajs.dom
 
 import scala.scalajs.js
+import scala.scalajs.js.annotation.*
 import io.github.edadma.markdown.*
 import pprint.PPrinter
 import org.scalajs.macrotaskexecutor.MacrotaskExecutor.Implicits.global
 
 @main def run(): Unit = render(App, "app")
+
+@js.native
+@JSGlobalScope
+object KaTeXGlobal extends js.Object {
+  def renderMathInElement(elem: dom.Element, options: js.Any): Unit = js.native
+}
+
+// 2. Build up the options object
+val katexOpts: js.Object = js.Dynamic.literal(
+  delimiters = js.Array(
+    js.Dynamic.literal(left = "\\(", right = "\\)", display = false),
+    js.Dynamic.literal(left = "\\[", right = "\\]", display = true),
+  ),
+  throwOnError = false,
+)
+
+// 3. Once your markdown is injected into the DOM, call KaTeX
+def renderMath(): Unit = {
+  val container = dom.document.getElementById("markdown-preview")
+  if (container != null) {
+    KaTeXGlobal.renderMathInElement(container, katexOpts)
+  }
+}
 
 val initialMarkdown = """..."""
 val basicSyntaxTemplate =
@@ -175,6 +199,8 @@ def App: FluxusNode = {
     },
     Seq(markdownInput),
   )
+
+  useEffect(renderMath, Seq(renderedHtml))
 
   // Function to handle changes to the markdown textarea
   def handleMarkdownChange(e: dom.Event): Unit = {
@@ -357,6 +383,7 @@ def App: FluxusNode = {
               if (activeTab == "preview")
                 div(
                   cls := "prose prose-invert w-full h-full overflow-auto max-w-none",
+                  id  := "markdown-preview",
                   rawHtml(renderedHtml),
                 )
               else null,
