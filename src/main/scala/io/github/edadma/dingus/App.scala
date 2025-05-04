@@ -391,7 +391,7 @@ def App: FluxusNode = {
             title = Some("Markdown Input"),
             children = div(
               textarea(
-                cls       := "w-full h-[500px] p-4 font-mono text-sm focus:outline-none resize-none",
+                cls       := "w-full h-[calc(70vh-10rem)] p-4 font-mono text-sm focus:outline-none resize-none",
                 value     := markdownInput,
                 onInput   := (handleMarkdownChange(_)),
                 autofocus := true,
@@ -433,7 +433,7 @@ def App: FluxusNode = {
               ),
             ),
             children = div(
-              cls := "w-full h-[500px]",
+              cls := "w-full h-[calc(70vh-10rem)]",
 
               // Preview Tab Content
               if (activeTab == "preview")
