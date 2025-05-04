@@ -99,7 +99,57 @@ val basicSyntaxTemplate =
     |
     |___
     |""".stripMargin
-//val extendedSyntaxTemplate = """..."""
+val latexExample =
+  """# Math Examples in Markdown
+    |
+    |This document shows how to write both inline and display math using `$...$` and `$$...$$`.
+    |
+    |Here’s an **inline** math example: the Pythagorean theorem $a^2 + b^2 = c^2$ explains the relation between the sides of a right triangle.
+    |
+    |If you need a literal dollar sign (not math), escape it like this: `\$100` → \$100.
+    |
+    |---
+    |
+    |## Common Formulas
+    |
+    |### Quadratic Formula (display math)
+    |
+    |$$
+    |x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+    |$$
+    |
+    |### Derivative of Sine (inline math)
+    |
+    |We know $\frac{d}{dx}\sin x = \cos x$ and similarly $\frac{d}{dx}\cos x = -\sin x$.
+    |
+    |### Gaussian Integral
+    |
+    |$$
+    |\int_{-\infty}^{\infty} e^{-x^2}\,dx = \sqrt{\pi}
+    |$$
+    |
+    |### Euler’s Identity
+    |
+    |One of the most beautiful formulas in mathematics is Euler’s identity:
+    |
+    |$$
+    |e^{i\pi} + 1 = 0
+    |$$
+    |
+    |---
+    |
+    |## A Worked Example
+    |
+    |Suppose you want to compute the area of a circle of radius $r$. Using integral calculus:
+    |
+    |$$
+    |A = \int_{0}^{2\pi}\int_{0}^{r} r'\,dr'\,d\theta = \pi r^2.
+    |$$
+    |
+    |---
+    |
+    |Happy math writing!
+    |""".stripMargin
 val tablesTemplate =
   """# Markdown Tables
     |
@@ -193,14 +243,17 @@ def App: FluxusNode = {
   val (prettyAst, renderedHtml) = useMemo(
     () => {
       val document =
-        parseDocumentContent(markdownInput, MarkdownConfig.withExtensions(tables = true, definitionLists = true))
+        parseDocumentContent(
+          markdownInput,
+          MarkdownConfig.withExtensions(tables = true, definitionLists = true, math = true),
+        )
 
       (noColorPPrinter.apply(document).render, renderToHTML(document))
     },
     Seq(markdownInput),
   )
 
-  useEffect(renderMath, Seq(renderedHtml))
+  useEffect(renderMath, Seq(renderedHtml, activeTab))
 
   // Function to handle changes to the markdown textarea
   def handleMarkdownChange(e: dom.Event): Unit = {
@@ -227,8 +280,8 @@ def App: FluxusNode = {
   // Function to load a template
   def loadTemplate(templateName: String): Unit = {
     val template = templateName match {
-      case "basic" => basicSyntaxTemplate
-//      case "extended" => extendedSyntaxTemplate
+      case "basic"  => basicSyntaxTemplate
+      case "latex"  => latexExample
       case "tables" => tablesTemplate
       case "links"  => linksImagesTemplate
       case _        => initialMarkdown
@@ -293,7 +346,14 @@ def App: FluxusNode = {
                   }),
                   "Basic Syntax",
                 )),
-//                li(a(onClick := (() => loadTemplate("extended")), "Extended Syntax")),
+                li(a(
+                  onClick := (() => {
+                    loadTemplate("latex")
+                    dropdownLabelRef.current.blur()
+                    dom.document.querySelector("textarea").asInstanceOf[dom.html.TextArea].focus()
+                  }),
+                  "Latex Example",
+                )),
                 li(a(
                   onClick := (() => {
                     loadTemplate("tables")
