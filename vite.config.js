@@ -4,5 +4,9 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [scalaJSPlugin(), tailwindcss()],
-  base: './'
+  base: './',
+  build: {
+    outDir: 'docs', // Output to docs folder instead of dist
+    emptyOutDir: true // Clear the output directory before building
+  }
 });
