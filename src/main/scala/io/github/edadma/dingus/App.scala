@@ -100,55 +100,51 @@ val basicSyntaxTemplate =
     |___
     |""".stripMargin
 val latexExample =
-  """# Math Examples in Markdown
+  """# Markdown Math Examples
     |
-    |This document shows how to write both inline and display math using `$...$` and `$$...$$`.
+    |This document shows how to write math in Markdown using KaTeX-style delimiters.
     |
-    |Here’s an **inline** math example: the Pythagorean theorem $a^2 + b^2 = c^2$ explains the relation between the sides of a right triangle.
+    |## Inline Math
     |
-    |If you need a literal dollar sign (not math), escape it like this: `\$100` → \$100.
+    |You can write math inline between single dollar signs:
     |
-    |---
+    |- The Pythagorean theorem is $a^2 + b^2 = c^2$.
+    |- The quadratic formula is $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$.
+    |- Euler’s identity is $e^{i\pi} + 1 = 0$.
     |
-    |## Common Formulas
+    |Escaping a dollar sign: `\$` produces \$.
     |
-    |### Quadratic Formula (display math)
+    |## Display Math
     |
-    |$$
-    |x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
-    |$$
-    |
-    |### Derivative of Sine (inline math)
-    |
-    |We know $\frac{d}{dx}\sin x = \cos x$ and similarly $\frac{d}{dx}\cos x = -\sin x$.
-    |
-    |### Gaussian Integral
+    |For centered, standalone equations, use double dollar signs:
     |
     |$$
     |\int_{-\infty}^{\infty} e^{-x^2}\,dx = \sqrt{\pi}
     |$$
     |
-    |### Euler’s Identity
-    |
-    |One of the most beautiful formulas in mathematics is Euler’s identity:
+    |You can also include multiple lines in one display block:
     |
     |$$
-    |e^{i\pi} + 1 = 0
+    |\int_{0}^{\infty} e^{-x}\,dx = 1 \\
+    |\sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6}
     |$$
     |
-    |---
-    |
-    |## A Worked Example
-    |
-    |Suppose you want to compute the area of a circle of radius $r$. Using integral calculus:
+    |Or combine different famous formulas:
     |
     |$$
-    |A = \int_{0}^{2\pi}\int_{0}^{r} r'\,dr'\,d\theta = \pi r^2.
+    |\begin{align}
+    |\frac{d}{dx} \sin x &= \cos x, \\
+    |\frac{d}{dx} \cos x &= -\sin x \\
+    |\end{align}
     |$$
     |
-    |---
+    |## More Examples
     |
-    |Happy math writing!
+    |- A simple exponential: $f(t) = e^{\lambda t}$
+    |- A definite integral: $\int_{-1}^{1} x^2 \,dx = \frac{2}{3}$
+    |- A sum with factorials: $\sum_{k=0}^{\infty} \frac{1}{k!} = e$$
+    |
+    |Enjoy writing beautiful math in your Markdown!
     |""".stripMargin
 val tablesTemplate =
   """# Markdown Tables
