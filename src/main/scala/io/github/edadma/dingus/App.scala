@@ -2,7 +2,7 @@ package io.github.edadma.dingus
 
 import io.github.edadma.fluxus.*
 import io.github.edadma.fluxus.daisyui.*
-import org.scalajs.dom.{HTMLTextAreaElement, document}
+import org.scalajs.dom.HTMLTextAreaElement
 import org.scalajs.dom
 
 import scala.scalajs.js
@@ -168,7 +168,8 @@ def App: FluxusNode = {
   // Parse the markdown to get the document AST
   val (prettyAst, renderedHtml) = useMemo(
     () => {
-      val document = parseDocumentContent(markdownInput)
+      val document =
+        parseDocumentContent(markdownInput, MarkdownConfig.withExtensions(tables = true, definitionLists = true))
 
       (noColorPPrinter.apply(document).render, renderToHTML(document))
     },
