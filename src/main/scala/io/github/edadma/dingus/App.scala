@@ -36,190 +36,8 @@ def renderMath(): Unit = {
   }
 }
 
-val initialMarkdown = """..."""
-val basicSyntaxTemplate =
-  """# Markdown Basic Syntax
-    |
-    |## Headings
-    |
-    |# Heading 1
-    |## Heading 2
-    |### Heading 3
-    |#### Heading 4
-    |##### Heading 5
-    |###### Heading 6
-    |
-    |## Paragraphs
-    |
-    |This is a paragraph. It's separated from other elements by a blank line.
-    |
-    |This is another paragraph. Markdown is easy to read and write!
-    |
-    |## Emphasis
-    |
-    |*This text is italicized*
-    |
-    |_This text is also italicized_
-    |
-    |**This text is bold**
-    |
-    |__This text is also bold__
-    |
-    |***This is bold and italicized***
-    |
-    |___This is also bold and italicized___
-    |
-    |## Lists
-    |
-    |### Unordered Lists
-    |- Item 1
-    |- Item 2
-    |  - Nested item 1
-    |  - Nested item 2
-    |- Item 3
-    |
-    |### Ordered Lists
-    |1. First item
-    |2. Second item
-    |   1. Nested item 1
-    |   2. Nested item 2
-    |3. Third item
-    |
-    |## Blockquotes
-    |
-    |> This is a blockquote
-    |>
-    |> It can span multiple lines
-    |
-    |## Horizontal Rules
-    |
-    |---
-    |
-    |***
-    |
-    |___
-    |""".stripMargin
-val latexExample =
-  """# Markdown Math Examples
-    |
-    |This document shows how to write math in Markdown using KaTeX-style delimiters.
-    |
-    |## Inline Math
-    |
-    |You can write math inline between single dollar signs:
-    |
-    |- The Pythagorean theorem is $a^2 + b^2 = c^2$.
-    |- The quadratic formula is $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$.
-    |- Euler’s identity is $e^{i\pi} + 1 = 0$.
-    |
-    |Escaping a dollar sign: `\$` produces \$.
-    |
-    |## Display Math
-    |
-    |For centered, standalone equations, use double dollar signs:
-    |
-    |$$
-    |\int_{-\infty}^{\infty} e^{-x^2}\,dx = \sqrt{\pi}
-    |$$
-    |
-    |You can also include multiple lines in one display block:
-    |
-    |$$
-    |\int_{0}^{\infty} e^{-x}\,dx = 1 \\
-    |\sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6}
-    |$$
-    |
-    |Or combine different famous formulas:
-    |
-    |$$
-    |\begin{align}
-    |\frac{d}{dx} \sin x &= \cos x, \\
-    |\frac{d}{dx} \cos x &= -\sin x \\
-    |\end{align}
-    |$$
-    |
-    |## More Examples
-    |
-    |- A simple exponential: $f(t) = e^{\lambda t}$
-    |- A definite integral: $\int_{-1}^{1} x^2 \,dx = \frac{2}{3}$
-    |- A sum with factorials: $\sum_{k=0}^{\infty} \frac{1}{k!} = e$$
-    |
-    |Enjoy writing beautiful math in your Markdown!
-    |""".stripMargin
-val tablesTemplate =
-  """# Markdown Tables
-    |
-    |## Basic Table
-    |
-    || Name     | Type   | Description         |
-    ||----------|--------|---------------------|
-    || id       | Int    | Unique identifier   |
-    || title    | String | Post title          |
-    || content  | String | Post content        |
-    || authorId | Int    | Author identifier   |
-    |
-    |## Aligned Table
-    |
-    || Left Aligned | Center Aligned | Right Aligned |
-    ||:-------------|:--------------:|-------------:|
-    || Left         | Center         | Right        |
-    || Text         | Text           | Text         |
-    |
-    |## Compact Table
-    |
-    || Function | Description                    |
-    ||----------|--------------------------------|
-    ||map()     |Transforms elements             |
-    ||filter()  |Selects elements by predicate   |
-    ||reduce()  |Combines elements               |
-    ||forEach() |Executes function on elements   |
-    |""".stripMargin
-
-val linksImagesTemplate =
-  """# Links and Images in Markdown
-    |
-    |## Basic Links
-    |
-    |[Link to GitHub](https://github.com)
-    |
-    |[Link with title](https://github.com "GitHub Homepage")
-    |
-    |## Reference Links
-    |
-    |[Reference link][1]
-    |
-    |[1]: https://github.com "GitHub"
-    |
-    |## URLs and Email Addresses
-    |
-    |<https://github.com>
-    |
-    |<example@example.com>
-    |
-    |## Basic Images
-    |
-    |![Alt text for image](https://picsum.photos/200/100 "Optional title")
-    |
-    |## Linked Images
-    |
-    |[![Alt text for image](https://picsum.photos/200/100)](https://github.com)
-    |
-    |## Image Sizing (using HTML)
-    |
-    |<img src="https://picsum.photos/200/100" width="300" height="150" alt="Resized image">
-    |
-    |## Image References
-    |
-    |![Reference image][logo]
-    |
-    |[logo]: https://picsum.photos/200/100 "Logo Title"
-    |
-    |## Images with Custom Styling (using HTML)
-    |
-    |<img src="https://picsum.photos/200/100" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" alt="Styled image">
-    |""".stripMargin
 def App: FluxusNode = {
-  val (markdownInput, setMarkdownInput, _) = useState("")
+  val (markdownInput, setMarkdownInput, _) = useState(initialMarkdown)
 
   // State to track the active tab
   val (activeTab, setActiveTab, _) = useState("preview")
@@ -280,6 +98,7 @@ def App: FluxusNode = {
       case "latex"  => latexExample
       case "tables" => tablesTemplate
       case "links"  => linksImagesTemplate
+      case "emojis" => emojisTemplate
       case _        => initialMarkdown
     }
     setMarkdownInput(template)
@@ -365,6 +184,14 @@ def App: FluxusNode = {
                     dom.document.querySelector("textarea").asInstanceOf[dom.html.TextArea].focus()
                   }),
                   "Links & Images",
+                )),
+                li(a(
+                  onClick := (() => {
+                    loadTemplate("emojis")
+                    dropdownLabelRef.current.blur()
+                    dom.document.querySelector("textarea").asInstanceOf[dom.html.TextArea].focus()
+                  }),
+                  "Emojis",
                 )),
               ),
             ),

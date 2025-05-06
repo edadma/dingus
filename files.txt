@@ -3,6 +3,12 @@
 # app sources
 ./src/main/scala/io/github/edadma/dingus
 App.scala
+basicSyntaxTemplate.scala
+emojisTemplate.scala
+initialMarkdown.scala
+latexExample.scala
+linksImagesTemplate.scala
+tablesTemplate.scala
 
 # build files
 ./
@@ -14,10 +20,6 @@ vite.config.js
 index.html
 ./project
 plugins.sbt
-
-# build
-./dist
-index.html
 
 # docs
 ./
