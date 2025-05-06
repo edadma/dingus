@@ -241,7 +241,7 @@ def App: FluxusNode = {
       val document =
         parseDocumentContent(
           markdownInput,
-          MarkdownConfig.withExtensions(tables = true, definitionLists = true, math = true),
+          MarkdownConfig.all,
         )
 
       (noColorPPrinter.apply(document).render, renderToHTML(document))
