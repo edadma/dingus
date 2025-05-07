@@ -79,7 +79,6 @@ Click the "Templates" dropdown to load example Markdown demonstrating various fe
 - LaTeX Math
 - Links & Images
 - Emojis
-- And more
 
 ### View Options
 
