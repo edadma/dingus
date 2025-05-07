@@ -37,12 +37,15 @@ val initialMarkdown =
     |
     |## Tables
     |
-    || Feature | Supported | Example |
-    ||---------|:---------:|---------|
-    || Headers | ✅ | # Header |
-    || Tables  | ✅ | This table |
-    || Emojis  | ✅ | :rocket: |
-    || Math    | ✅ | $E=mc^2$ |
+    |Tables support inline formatting:
+    |
+    || Feature | Support | Description |
+    ||---------|:-------:|-------------|
+    || **Bold text** | ✅ | Use `**text**` syntax |
+    || *Italic text* | ✅ | Use `*text*` syntax |
+    || `Code` | ✅ | Use backticks |
+    || [Links](#) | ✅ | Use `[text](url)` syntax |
+    || :smile: | ✅ | Use `:emoji:` syntax |
     |
     |## Blockquotes
     |
@@ -50,9 +53,18 @@ val initialMarkdown =
     |>
     |> — John Gruber
     |
+    |## Callouts
+    |
+    |Callouts help create visually distinct sections for notes, warnings, and more:
+    |
+    |> [!danger]
+    |> ⚠️ **Critical Warning**
+    |> 
+    |> This callout style is perfect for highlighting dangerous operations or important warnings that shouldn't be missed.
+    |
     |## Math Expressions
     |
-    |Inline math: $y = mx + b$
+    |Inline math: $e^{i\pi} + 1 = 0$
     |
     |Display math:
     |$$

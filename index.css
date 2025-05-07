@@ -120,4 +120,46 @@
   .dark .callout-important .callout-title {
     @apply text-purple-400;
   }
+
+  /* Make list bullets darker and more visible in callouts */
+  .prose .callout-content ul li::marker {
+    color: hsl(var(--bc) / 0.9) !important; /* Use base content color at high opacity */
+  }
+
+  .prose .callout-content ol li::marker {
+    color: hsl(var(--bc) / 0.9) !important;
+  }
+
+  /* Ensure the bullets are more visible in each callout variant */
+  .prose .callout-note .callout-content li::marker {
+    color: hsl(var(--in) / 0.9) !important; /* Info color */
+  }
+
+  .prose .callout-warning .callout-content li::marker {
+    color: hsl(var(--wa) / 0.9) !important; /* Warning color */
+  }
+
+  .prose .callout-danger .callout-content li::marker {
+    color: hsl(var(--er) / 0.9) !important; /* Error color */
+  }
+
+  .prose .callout-tip .callout-content li::marker {
+    color: hsl(var(--su) / 0.9) !important; /* Success color */
+  }
+
+  .prose .callout-important .callout-content li::marker {
+    color: hsl(var(--p) / 0.9) !important; /* Primary color */
+  }
+
+  /* Make sure the list items themselves have proper spacing */
+  .prose .callout-content li {
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+  }
+
+  /* Ensure bold text stands out */
+  .prose .callout-content strong {
+    font-weight: 700 !important;
+    color: inherit !important;
+  }
 }
