@@ -21,6 +21,10 @@ index.html
 ./project
 plugins.sbt
 
+# css
+./
+index.css
+
 # docs
 ./
 README.md
