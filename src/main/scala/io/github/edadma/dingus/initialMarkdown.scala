@@ -8,7 +8,6 @@ val initialMarkdown =
     |## Basic Formatting
     |
     |You can write **bold text**, *italic text*, or even ***bold and italic text***.
-    |Create ~~strikethrough~~ with two tildes.
     |
     |## Lists
     |
