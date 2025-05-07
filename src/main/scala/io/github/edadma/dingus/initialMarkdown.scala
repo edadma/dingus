@@ -70,17 +70,6 @@ val initialMarkdown =
     |
     |Express yourself with emojis like :smile:, :heart:, and :thumbsup:!
     |
-    |## Special Features
-    |
-    |Horizontal rule:
-    |
-    |---
-    |
-    |Task list:
-    |- [x] Basic syntax
-    |- [x] Extended syntax
-    |- [ ] Make something awesome
-    |
     |## Try It Out!
     |
     |Choose a template from the dropdown menu to explore specific features, or edit this text to experiment with markdown formatting.
