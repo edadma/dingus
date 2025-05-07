@@ -268,7 +268,7 @@
     |
     |- A simple exponential: $f(t) = e^{\\lambda t}$
     |- A definite integral: $\\int_{-1}^{1} x^2 \\,dx = \\frac{2}{3}$
-    |- A sum with factorials: $\\sum_{k=0}^{\\infty} \\frac{1}{k!} = e$$
+    |- A sum with factorials: $\\sum_{k=0}^{\\infty} \\frac{1}{k!} = e$
     |
     |Enjoy writing beautiful math in your Markdown!
     |`,124)}t=f0.prototype=new L;t.constructor=f0;new w().i(f0,"io.github.edadma.dingus.latexExample$package$",{gf:1});var g_;function BO(){return g_||(g_=new f0),g_}function l0(){this.BS=null,p_=this,this.BS=nt().mE(`# Links and Images in Markdown
