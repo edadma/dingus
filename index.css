@@ -7,3 +7,117 @@
 [align="left"] { text-align: left; }
 [align="center"] { text-align: center; }
 [align="right"] { text-align: right; }
+
+@layer components {
+  /* Base callout styles */
+  .callout {
+    @apply rounded-lg p-4 my-4 border-l-4 shadow-sm bg-gray-50;
+  }
+
+  .callout-title {
+    @apply font-semibold text-base mb-2 flex items-center;
+  }
+
+  .callout-content {
+    @apply text-sm text-gray-700;
+  }
+
+  /* Callout types */
+  .callout-note {
+    @apply border-blue-500 bg-blue-50;
+  }
+  .callout-note .callout-title {
+    @apply text-blue-700;
+  }
+  .callout-note .callout-title::before {
+    content: "ℹ️";
+    @apply mr-2;
+  }
+
+  .callout-warning {
+    @apply border-amber-500 bg-amber-50;
+  }
+  .callout-warning .callout-title {
+    @apply text-amber-700;
+  }
+  .callout-warning .callout-title::before {
+    content: "⚠️";
+    @apply mr-2;
+  }
+
+  .callout-danger {
+    @apply border-red-500 bg-red-50;
+  }
+  .callout-danger .callout-title {
+    @apply text-red-700;
+  }
+  .callout-danger .callout-title::before {
+    content: "🚫";
+    @apply mr-2;
+  }
+
+  .callout-tip {
+    @apply border-green-500 bg-green-50;
+  }
+  .callout-tip .callout-title {
+    @apply text-green-700;
+  }
+  .callout-tip .callout-title::before {
+    content: "💡";
+    @apply mr-2;
+  }
+
+  .callout-important {
+    @apply border-purple-500 bg-purple-50;
+  }
+  .callout-important .callout-title {
+    @apply text-purple-700;
+  }
+  .callout-important .callout-title::before {
+    content: "🔔";
+    @apply mr-2;
+  }
+
+  /* Dark mode support */
+  .dark .callout {
+    @apply bg-gray-800 shadow-none;
+  }
+  .dark .callout-content {
+    @apply text-gray-300;
+  }
+
+  .dark .callout-note {
+    @apply bg-blue-900/30 border-blue-600;
+  }
+  .dark .callout-note .callout-title {
+    @apply text-blue-400;
+  }
+
+  .dark .callout-warning {
+    @apply bg-amber-900/30 border-amber-600;
+  }
+  .dark .callout-warning .callout-title {
+    @apply text-amber-400;
+  }
+
+  .dark .callout-danger {
+    @apply bg-red-900/30 border-red-600;
+  }
+  .dark .callout-danger .callout-title {
+    @apply text-red-400;
+  }
+
+  .dark .callout-tip {
+    @apply bg-green-900/30 border-green-600;
+  }
+  .dark .callout-tip .callout-title {
+    @apply text-green-400;
+  }
+
+  .dark .callout-important {
+    @apply bg-purple-900/30 border-purple-600;
+  }
+  .dark .callout-important .callout-title {
+    @apply text-purple-400;
+  }
+}
