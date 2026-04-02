@@ -8,6 +8,7 @@ import org.scalajs.dom
 import scala.scalajs.js
 import scala.scalajs.js.annotation.*
 import io.github.edadma.markdown.*
+import io.github.edadma.highlighter.*
 import pprint.PPrinter
 import org.scalajs.macrotaskexecutor.MacrotaskExecutor.Implicits.global
 
@@ -36,6 +37,22 @@ def renderMath(): Unit = {
   }
 }
 
+// Parse all grammars once at startup, cache Highlighter instances per language
+private val highlighterMode = InlineMode(Theme.OneDark)
+
+private val highlighterCache: Map[String, Highlighter] =
+  grammars.flatMap { case (lang, json) =>
+    Highlighter.fromJson(json, highlighterMode).toOption.map(lang -> _)
+  }
+
+private val codeHighlighter: (String, String) => Option[String] = (code, lang) =>
+  val resolved = grammarAliases.getOrElse(lang, lang)
+  highlighterCache.get(resolved).map(_.highlight(code))
+
+private val markdownConfig = MarkdownConfig.all.copy(
+  codeHighlighter = Some(codeHighlighter),
+)
+
 def App: FluxusNode = {
   val (markdownInput, setMarkdownInput, _) = useState(initialMarkdown)
 
@@ -59,10 +76,10 @@ def App: FluxusNode = {
       val document =
         parseDocumentContent(
           markdownInput,
-          MarkdownConfig.all,
+          markdownConfig,
         )
 
-      (noColorPPrinter.apply(document).render, renderToHTML(document))
+      (noColorPPrinter.apply(document).render, renderToHTML(document, markdownConfig))
     },
     Seq(markdownInput),
   )
@@ -94,12 +111,13 @@ def App: FluxusNode = {
   // Function to load a template
   def loadTemplate(templateName: String): Unit = {
     val template = templateName match {
-      case "basic"  => basicSyntaxTemplate
-      case "latex"  => latexExample
-      case "tables" => tablesTemplate
-      case "links"  => linksImagesTemplate
-      case "emojis" => emojisTemplate
-      case _        => initialMarkdown
+      case "basic"      => basicSyntaxTemplate
+      case "latex"      => latexExample
+      case "tables"     => tablesTemplate
+      case "links"      => linksImagesTemplate
+      case "emojis"     => emojisTemplate
+      case "highlighting" => syntaxHighlightingTemplate
+      case _            => initialMarkdown
     }
     setMarkdownInput(template)
   }
@@ -192,6 +210,14 @@ def App: FluxusNode = {
                     dom.document.querySelector("textarea").asInstanceOf[dom.html.TextArea].focus()
                   }),
                   "Emojis",
+                )),
+                li(a(
+                  onClick := (() => {
+                    loadTemplate("highlighting")
+                    dropdownLabelRef.current.blur()
+                    dom.document.querySelector("textarea").asInstanceOf[dom.html.TextArea].focus()
+                  }),
+                  "Syntax Highlighting",
                 )),
               ),
             ),
