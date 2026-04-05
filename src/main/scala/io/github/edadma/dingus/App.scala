@@ -49,8 +49,19 @@ private val codeHighlighter: (String, String) => Option[String] = (code, lang) =
   val resolved = grammarAliases.getOrElse(lang, lang)
   highlighterCache.get(resolved).map(_.highlight(code))
 
+// Doc-tag registry used by the demo — downstream tools would customize this.
+private val demoDocTagRegistry = TagRegistry(
+  TagDefinition("api",     acceptsTarget = false, ContentMode.InlineMarkdown),
+  TagDefinition("param",   acceptsTarget = true,  ContentMode.InlineMarkdown),
+  TagDefinition("returns", acceptsTarget = false, ContentMode.InlineMarkdown),
+  TagDefinition("since",   acceptsTarget = false, ContentMode.InlineMarkdown),
+  TagDefinition("example", acceptsTarget = false, ContentMode.BlockMarkdown),
+  TagDefinition("literal", acceptsTarget = false, ContentMode.Opaque),
+)
+
 private val markdownConfig = MarkdownConfig.all.copy(
   codeHighlighter = Some(codeHighlighter),
+  docTags = DocTagConfig(enabled = true, registry = demoDocTagRegistry),
 )
 
 def App: FluxusNode = {
@@ -117,6 +128,10 @@ def App: FluxusNode = {
       case "links"      => linksImagesTemplate
       case "emojis"     => emojisTemplate
       case "highlighting" => syntaxHighlightingTemplate
+      case "footnotes"  => footnotesTemplate
+      case "smart"      => smartPunctuationTemplate
+      case "attributes" => attributesTemplate
+      case "doctags"    => docTagsTemplate
       case _            => initialMarkdown
     }
     setMarkdownInput(template)
@@ -218,6 +233,38 @@ def App: FluxusNode = {
                     dom.document.querySelector("textarea").asInstanceOf[dom.html.TextArea].focus()
                   }),
                   "Syntax Highlighting",
+                )),
+                li(a(
+                  onClick := (() => {
+                    loadTemplate("footnotes")
+                    dropdownLabelRef.current.blur()
+                    dom.document.querySelector("textarea").asInstanceOf[dom.html.TextArea].focus()
+                  }),
+                  "Footnotes",
+                )),
+                li(a(
+                  onClick := (() => {
+                    loadTemplate("smart")
+                    dropdownLabelRef.current.blur()
+                    dom.document.querySelector("textarea").asInstanceOf[dom.html.TextArea].focus()
+                  }),
+                  "Smart Punctuation",
+                )),
+                li(a(
+                  onClick := (() => {
+                    loadTemplate("attributes")
+                    dropdownLabelRef.current.blur()
+                    dom.document.querySelector("textarea").asInstanceOf[dom.html.TextArea].focus()
+                  }),
+                  "Attributes",
+                )),
+                li(a(
+                  onClick := (() => {
+                    loadTemplate("doctags")
+                    dropdownLabelRef.current.blur()
+                    dom.document.querySelector("textarea").asInstanceOf[dom.html.TextArea].focus()
+                  }),
+                  "Doc Tags",
                 )),
               ),
             ),

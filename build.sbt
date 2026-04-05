@@ -16,7 +16,7 @@ lazy val dingus = project
       "io.github.cquiroz" %%% "scala-java-time" % "2.6.0",
       "io.github.edadma"  %%% "fluxus"          % "0.0.34",
       "io.github.edadma"  %%% "fluxus-daisyui"  % "0.0.7",
-      "io.github.edadma"  %%% "markdown"        % "0.2.0",
+      "io.github.edadma"  %%% "markdown"        % "0.4.0",
       "io.github.edadma"  %%% "highlighter"     % "0.0.1",
       "com.lihaoyi"       %%% "pprint"          % "0.9.0",
     ),
